@@ -1,3 +1,5 @@
 .venv/
 allure-results/
 .idea/
+pytest.ini
+venv/
