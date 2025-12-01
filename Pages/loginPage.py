@@ -25,3 +25,5 @@ class LoginPage:
         dropdown = wait.until(EC.element_to_be_clickable((By.ID, self.user_select_id)))
         select = Select(dropdown)
         select.select_by_visible_text(visible_text)
+
+
