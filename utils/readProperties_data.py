@@ -12,4 +12,5 @@ class ReadConfig_data():
     def getCustomerName(self):
         return config.get("login data", "yourName")
 
-
+    def getAccountValue(self):
+        return config.get("user information", "customerAccount1").strip('"')
