@@ -34,3 +34,4 @@ Edit Configurations/data.ini:
 - Ensure the correct WebDriver is installed and matches your browser version.
 - If account selection should use visible text, implement select_account_by_text in Pages/accountPage.py and call it in tests.
 
+## Testing
