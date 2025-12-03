@@ -1,14 +1,15 @@
 import time
 
 import pytest
-from selenium.webdriver.support.wait import WebDriverWait
 
 from Pages.loginPage import LoginPage
+from Pages.accountPage import AccountsPage
 from utils.readProperties_data import ReadConfig_data
 
 class Test_LoginPage:
     dev_url = ReadConfig_data().getURLS()
     customerName = ReadConfig_data().getCustomerName()
+    accountValue = ReadConfig_data().getAccountValue()
 
     @pytest.mark.dev
     def test_login_page_title(self, setup):
@@ -19,14 +20,7 @@ class Test_LoginPage:
         self.lp.clickCustomerLogin()
         self.lp.selectUserByText(self.customerName)
         self.lp.clickLogin()
+        self.ap = AccountsPage(self.driver)
+        self.ap.select_account_by_value(self.accountValue)
         time.sleep(2)
-
         self.driver.quit()
-
-        # self.hp = HomePage(self.driver)
-        # self.hp.verifyNdosiHeading()
-        # self.hp.clickLearningMaterial()
-        # self.login = LoginPage(self.driver)
-        # self.login.enterEmail(self.username)
-        # self.login.enterPassword(self.password)
-        # self.login.clickLoginBtn()
