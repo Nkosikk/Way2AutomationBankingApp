@@ -1,4 +1,7 @@
+import time
+
 import pytest
+from selenium.webdriver.support.wait import WebDriverWait
 
 from Pages.loginPage import LoginPage
 from utils.readProperties_data import ReadConfig_data
@@ -15,6 +18,8 @@ class Test_LoginPage:
         self.lp = LoginPage(self.driver)
         self.lp.clickCustomerLogin()
         self.lp.selectUserByText(self.customerName)
+        self.lp.clickLogin()
+        time.sleep(2)
 
         self.driver.quit()
 

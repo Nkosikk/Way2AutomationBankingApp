@@ -8,6 +8,8 @@ class LoginPage:
 
     btn_custom_login_xpath = "//button[normalize-space(text())='Customer Login']"
     user_select_id = "userSelect"
+    btn_login_xpath = "//button[@class='btn btn-default' and normalize-space(text())='Login']"
+
 
     def __init__(self, driver):
         self.driver = driver
@@ -25,5 +27,14 @@ class LoginPage:
         dropdown = wait.until(EC.element_to_be_clickable((By.ID, self.user_select_id)))
         select = Select(dropdown)
         select.select_by_visible_text(visible_text)
+
+    def clickLogin(self):
+
+        element = self.driver.find_element(By.XPATH,self.btn_login_xpath)
+        element.click()
+
+
+
+
 
 

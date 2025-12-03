@@ -12,3 +12,4 @@ class ReadConfig_data():
     def getCustomerName(self):
         return config.get("login data", "yourName")
 
+
