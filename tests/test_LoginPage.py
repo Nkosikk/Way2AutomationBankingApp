@@ -22,5 +22,5 @@ class Test_LoginPage:
         self.lp.clickLogin()
         self.ap = AccountsPage(self.driver)
         self.ap.select_account_by_value(self.accountValue)
-        time.sleep(2)
+        time.sleep(10)
         self.driver.quit()
