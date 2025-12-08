@@ -9,6 +9,7 @@ from utils.readProperties_data import ReadConfig_data
 class Test_LoginPage:
     dev_url = ReadConfig_data().getURLS()
     customerName = ReadConfig_data().getCustomerName()
+    amount1= ReadConfig_data().getDepositAmount()
 
 
     @pytest.mark.dev
@@ -21,7 +22,8 @@ class Test_LoginPage:
         self.lp.selectUserByText(self.customerName)
         self.lp.clickLogin()
         self.ap = AccountsPage(self.driver)
-        self.ap.select_account_by_index(1)
+        self.ap.select_account_by_index(0)
         self.ap.click_deposit_Btn()
+        self.ap.account_deposit(self.amount1)
         time.sleep(10)
         self.driver.quit()
