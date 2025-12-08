@@ -24,8 +24,8 @@ class AccountsPage:
         dropdown = wait.until(EC.visibility_of_element_located((By.ID, self.dropdown_userSelect_id)))
         Select(dropdown).select_by_visible_text(text)
 
-    def select_account_by_value(self, value: str):
+    def select_account_by_index(self, index: int):
         """Select an account by its value from the account dropdown after login."""
         wait = WebDriverWait(self.driver, 10)
         dropdown = wait.until(EC.element_to_be_clickable((By.ID, self.dropdown_accountSelect_id)))
-        Select(dropdown).select_by_value(value)
+        Select(dropdown).select_by_index(index)
