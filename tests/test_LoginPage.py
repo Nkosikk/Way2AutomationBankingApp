@@ -22,5 +22,6 @@ class Test_LoginPage:
         self.lp.clickLogin()
         self.ap = AccountsPage(self.driver)
         self.ap.select_account_by_index(1)
+        self.ap.click_deposit_Btn()
         time.sleep(10)
         self.driver.quit()

@@ -9,6 +9,7 @@ class AccountsPage:
     dropdown_accountsDropdown_id = "//button[normalize-space(text())='Customer Login']"
     dropdown_userSelect_id = "userSelect"
     dropdown_accountSelect_id = "accountSelect"
+    btn_clickDeposit_xpath = "//button[@ng-click='deposit()']"
 
     def __init__(self, driver):
         self.driver = driver
@@ -29,3 +30,8 @@ class AccountsPage:
         wait = WebDriverWait(self.driver, 10)
         dropdown = wait.until(EC.element_to_be_clickable((By.ID, self.dropdown_accountSelect_id)))
         Select(dropdown).select_by_index(index)
+
+    def click_deposit_Btn(self):
+        wait = WebDriverWait(self.driver, 10)
+        element = wait.until(EC.element_to_be_clickable((By.XPATH, self.btn_clickDeposit_xpath)))
+        element.click()
