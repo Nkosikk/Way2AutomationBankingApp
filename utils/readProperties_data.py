@@ -14,3 +14,6 @@ class ReadConfig_data():
 
     def getAccountValue(self):
         return config.get("user information", "customerAccount1").strip('"')
+
+    def getDepositAmount(self):
+        return config.get("deposit amounts", "amount1")
