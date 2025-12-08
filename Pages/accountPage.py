@@ -11,6 +11,8 @@ class AccountsPage:
     dropdown_accountSelect_id = "accountSelect"
     btn_clickDeposit_xpath = "//button[@ng-click='deposit()']"
     enter_amount="//input[@ng-model='amount']"
+    btn_clickSubmitDep_xpath ="//button[@type='submit' and normalize-space()='Deposit']"
+
 
 
     def __init__(self, driver):
@@ -42,3 +44,8 @@ class AccountsPage:
         wait = WebDriverWait(self.driver, 10)
         element = wait.until(EC.element_to_be_clickable((By.XPATH, self.enter_amount)))
         element.send_keys(amount1)
+
+    def clickSubmitDepBtn(self):
+        wait = WebDriverWait(self.driver, 10)
+        element = wait.until(EC.element_to_be_clickable((By.XPATH, self.btn_clickSubmitDep_xpath)))
+        element.click()
