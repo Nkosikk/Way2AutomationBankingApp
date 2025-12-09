@@ -8,6 +8,6 @@ class LogoutPage:
     def __init__(self, driver):
         self.driver = driver
 
-    def logout(self):
+    def clickLogoutButton(self):
         element = self.driver.find_element(By.XPATH, self.btn_logout_id)
         element.click()

@@ -1,5 +1,6 @@
 import time
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
@@ -35,3 +36,11 @@ class LoginPage:
         dropdown.click()
         option = self.driver.find_element(By.XPATH, f"//option[text()='{accountNumber}']")
         option.click()
+
+    def selectAccounts(self, accountNumber):
+        dropdown = self.wait.until(
+            EC.element_to_be_clickable((By.ID, self.drp_accountSelect_id))
+        )
+        select = Select(dropdown)
+        select.select_by_visible_text(accountNumber)
+

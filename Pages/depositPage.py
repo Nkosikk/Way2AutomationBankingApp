@@ -9,6 +9,7 @@ class DepositPage:
     txt_amount_xpath = "//input[@placeholder='amount']"
     btn_submitDeposit_xpath = "//button[@type='submit' and contains(text(),'Deposit')]"
     lbl_depositSuccess_xpath = "//div//span[@class='error ng-binding']"
+    lbl_balance_xpath = "//div[@class='center']/strong[2]"
 
     def __init__(self, driver):
         self.driver = driver
@@ -30,5 +31,13 @@ class DepositPage:
     def getDepositSuccessMessage(self):
         element = self.wait.until(EC.visibility_of_element_located((By.XPATH, self.lbl_depositSuccess_xpath)))
         return element.text
+
+    def getBalance(self):
+        element = self.wait.until(EC.visibility_of_element_located((By.XPATH, self.lbl_balance_xpath)))
+        return int(element.text)
+
+
+
+
 
 
