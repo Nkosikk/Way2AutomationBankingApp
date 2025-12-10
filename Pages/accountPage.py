@@ -12,6 +12,7 @@ class AccountsPage:
     btn_clickDeposit_xpath = "//button[@ng-click='deposit()']"
     enter_amount="//input[@ng-model='amount']"
     btn_clickSubmitDep_xpath ="//button[@type='submit' and normalize-space()='Deposit']"
+    lbl_currentBalance_xpath = "//div[@id='account-balance']//strong[@class='ng-binding']"
 
 
 
@@ -49,3 +50,25 @@ class AccountsPage:
         wait = WebDriverWait(self.driver, 10)
         element = wait.until(EC.element_to_be_clickable((By.XPATH, self.btn_clickSubmitDep_xpath)))
         element.click()
+
+    def getOldBalance(self):
+        balance_element = self.driver.find_element(
+            By.XPATH, "//div[@ng-hide='noAccount']//strong[@class='ng-binding'][2]"
+        )
+        balance_text = balance_element.text.strip()
+        old_balance = int(balance_text)
+        print("Old Balance:", old_balance)
+        return old_balance
+
+    def getNewBalance(self,old_balance):
+        balance_element = self.driver.find_element(
+            By.XPATH, "//div[@ng-hide='noAccount']//strong[@class='ng-binding'][2]"
+        )
+        balance_text = balance_element.text.strip()
+        new_balance = int(balance_text)
+        print("New Balance:", new_balance)
+
+        if new_balance > old_balance:
+            print("Deposit successful: Balance increased!")
+        else:
+            print("Deposit may have failed: Balance did not increase.")
