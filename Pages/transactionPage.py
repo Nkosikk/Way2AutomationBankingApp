@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 
 class TransactionPage:
     btn_transaction_xpath = "//button[contains(text(), 'Transactions')]"
-    hdr_transactionDate_xpath = "//table//thead//tr//td[a[contains(text(),'Date-Time')]]"
+    hdr_transactionDate_xpath = "//table//thead//tr//td/a[contains(text(),'Date-Time')]"
     lbl_dateTime_xpath = "//table//tbody/tr//td[1]"
     lbl_amount_xpath = "//table//tbody/tr//td[2]"
     btn_back_xpath = "//button[contains(text(), 'Back')]"
