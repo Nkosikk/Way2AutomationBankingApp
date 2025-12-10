@@ -1,11 +1,16 @@
+
+import time
+
 import pytest
 
 from Pages.depositPage import DepositPage
 from Pages.loginPage import LoginPage
 from Pages.logoutPage import LogoutPage
+from Pages.transactionPage import TransactionPage
 from utils.browserSetUp import setup_Browser
 from utils.commonLogin import LoginToWay2AutomationBankingApp
 from utils.readProperties_data import ReadConfig_data
+from datetime import datetime
 
 
 class TestWay2AutomationBankingApp:
@@ -98,5 +103,67 @@ class TestWay2AutomationBankingApp:
 
         # Logout
         logout_Page.clickLogoutButton()
+
+    @pytest.mark.dev
+    def test_scenario3(self, setup):
+        self.driver = setup_Browser(setup)
+
+        login_Page = LoginPage(self.driver)
+        deposit_Page = DepositPage(self.driver)
+        transactions_Page = TransactionPage(self.driver)
+        logout_Page = LogoutPage(self.driver)
+        expected_success_message = ReadConfig_data().getDepSuccessMessage()
+
+        LoginToWay2AutomationBankingApp(self.driver, self.username)
+        login_Page.selectAccount(int(self.account3))
+
+        # Capture initial balance
+        initial_balance = deposit_Page.getBalance()
+        print("This is the initial balance: ", initial_balance)
+
+        # Make a deposit
+        deposit_Page.clickDepositButton()
+        deposit_Page.enterAmount(int(self.amountTest3))
+        deposit_Page.clickSubmitDepositButton()
+        time.sleep(2)
+
+        transaction_time = datetime.now().strftime("%b %d, %Y %I:%M:%S %p")
+        print("Recorded transaction time:", transaction_time)
+
+        fmt = "%b %d, %Y %I:%M:%S %p"  # Matching UI format
+
+        # Record transaction time
+        expected_dt = datetime.strptime(transaction_time, fmt)
+        print("Expected transaction datetime: ", expected_dt)
+
+        # Verify success message and updated balance
+        success_message = deposit_Page.getDepositSuccessMessage()
+        assert success_message == expected_success_message
+
+        # Verify balance update
+        new_balance = deposit_Page.getBalance()
+        assert int(new_balance) == int(initial_balance) + int(self.amountTest3), \
+            f"Expected balance: {initial_balance + self.amountTest3}, Actual: {new_balance}"
+        print("This is a new balance: ", new_balance)
+
+        transactions_Page.clickTransactionButton()
+        time.sleep(2)
+        transactions_Page.clickTransactionDateHeader()
+        time.sleep(2)
+
+
+        latest_dt = transactions_Page.getTransactionDateTime()
+        print("Transaction datetime from UI:", latest_dt)
+        actual_dt = datetime.strptime(latest_dt, fmt)
+
+        time_diff = abs((expected_dt - actual_dt).total_seconds())
+
+        assert time_diff <= 5, \
+            f"Time drift too large! Expected {transaction_time}, Got {latest_dt}. Diff: {time_diff} sec"
+
+
+
+
+
 
 
