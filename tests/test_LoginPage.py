@@ -28,5 +28,5 @@ class Test_LoginPage:
         self.ap.account_deposit(self.amount1)
         self.ap.clickSubmitDepBtn()
         self.ap.getNewBalance(old_balance)
-        time.sleep(10)
+        self.ap.ClickLogout()
         self.driver.quit()

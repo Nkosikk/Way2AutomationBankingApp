@@ -13,6 +13,7 @@ class AccountsPage:
     enter_amount="//input[@ng-model='amount']"
     btn_clickSubmitDep_xpath ="//button[@type='submit' and normalize-space()='Deposit']"
     lbl_currentBalance_xpath = "//div[@id='account-balance']//strong[@class='ng-binding']"
+    btn_Logout_xpath = "(//button[contains(text(),'Logout')])[1]"
 
 
 
@@ -72,3 +73,8 @@ class AccountsPage:
             print("Deposit successful: Balance increased!")
         else:
             print("Deposit may have failed: Balance did not increase.")
+
+    def ClickLogout(self):
+        wait = WebDriverWait(self.driver, 10)
+        element = wait.until(EC.element_to_be_clickable((By.XPATH, self.btn_Logout_xpath)))
+        element.click()
