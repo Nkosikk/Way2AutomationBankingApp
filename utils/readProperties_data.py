@@ -32,3 +32,9 @@ class ReadConfig_data():
 
     def getDepSuccessMessage(self):
         return config.get("Test Data", "successMessage")
+
+    def getWithdrawSuccessMessage(self):
+        return config.get("Test Data", "withdrawMessage")
+
+    def getWithdrawFailMessage(self):
+        return config.get("Test Data", "insufficientMessage")

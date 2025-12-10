@@ -161,6 +161,31 @@ class TestWay2AutomationBankingApp:
         assert time_diff <= 5, \
             f"Time drift too large! Expected {transaction_time}, Got {latest_dt}. Diff: {time_diff} sec"
 
+        print("Transaction datetime verified:", actual_dt)
+
+        # Verify transaction amount
+        transaction_amount = transactions_Page.getTransactionAmount()
+        assert transaction_amount == str(self.amountTest3), \
+            f"Amount mismatch! Expected: {self.amountTest3}, Got: {transaction_amount}"
+        print("Transaction amount verified:", transaction_amount)
+
+
+        #Withdraw money
+        transactions_Page.clickBackButton()
+        time.sleep(1)
+        transactions_Page.clickWithdrawButton()
+        time.sleep(1)
+        deposit_Page.enterAmount(int(self.amountTest3))
+        transactions_Page.clickPerformWithdrawButton()
+        time.sleep(2)
+
+        # Verify withdrawal success message
+        withdrawl_success_message = transactions_Page.getWithdrawSuccessMessage()
+        expected_success_message = ReadConfig_data().getWithdrawSuccessMessage()
+        assert withdrawl_success_message == expected_success_message
+        print("Withdrawl success message verified:", withdrawl_success_message)
+
+
 
 
 
